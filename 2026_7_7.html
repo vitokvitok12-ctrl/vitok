@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Пхукет 2026: 7 дней отдыха (7 друзей)</title>
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        tgBg: '#0f172a',
+                        tgCard: '#1e293b',
+                        tgAccent: '#06b6d4',
+                        tgTropical: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #090d16;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.28) 0%, rgba(6, 182, 212, 0.22) 45%, rgba(9, 13, 22, 0.98) 100%);
+        }
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulseRing 2s infinite;
+        }
+        @keyframes pulseRing {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body class="pb-28 select-none">
+
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ: СТАТУС СИНХРОНИЗАЦИИ, ТЕКУЩИЙ ПРОФИЛЬ И ПРАВА ДОСТУПА -->
+    <div class="bg-slate-950/90 border-b border-white/10 px-4 py-2 sticky top-0 z-30 backdrop-blur-md">
+        <div class="max-w-md mx-auto flex items-center justify-between gap-2">
+            <!-- Бейдж текущего профиля (Кто смотрит приложение) -->
+            <button onclick="openProfileModal()" class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-cyan-400/50 active:scale-95 transition min-w-0">
+                <span id="sync-indicator" class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot shrink-0" title="Облачная синхронизация активна"></span>
+                <span id="current-user-badge" class="text-xs font-bold text-white truncate">Вы: Виктор 👑</span>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+            </button>
+
+            <div class="flex items-center gap-1.5 shrink-0">
+                <!-- Кнопка инструкции запуска в Telegram -->
+                <button onclick="openTgGuideModal()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-300 text-xs font-bold active:scale-95 transition">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>В Telegram</span>
+                </button>
+
+                <!-- Кнопка управления правами доступа (Админ-панель) -->
+                <button onclick="openPermissionsModal()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-bold active:scale-95 transition">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Права</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВЕРХНИЙ БАННЕР / ШАПКА -->
+    <header class="hero-gradient pt-4 pb-5 px-4 border-b border-white/10 relative overflow-hidden">
+        <div class="max-w-md mx-auto">
+            <div class="flex items-center justify-between mb-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <i class="fa-solid fa-calendar-check text-[10px]"></i>
+                    13 – 20 ноября 2026 • 7 дней отдыха + вылет • 7 человек
+                </span>
+                <button onclick="copyShareText()" class="text-xs font-medium text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 px-3 py-1 rounded-full flex items-center gap-1.5 active:scale-95 transition">
+                    <i class="fa-brands fa-telegram"></i> План дня в чат
+                </button>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        Пхукет 2026: Гид 🌴
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-0.5 flex items-center gap-2">
+                        <span><i class="fa-solid fa-users text-cyan-400 mr-1"></i>7 друзей</span>
+                        <span>•</span>
+                        <span>7 дней отдыха (13–19 ноя)</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-cloud text-emerald-400 mr-1"></i>Live-счет</span>
+                    </p>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-2xl shadow-lg shadow-cyan-500/20 shrink-0">
+                    🏖️
+                </div>
+            </div>
+
+            <!-- Таймер обратного отсчета и ссылка на отель -->
+            <div class="mt-4 glass-card rounded-2xl p-3 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-300 shrink-0">
+                        <i class="fa-solid fa-plane-departure"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Прилет 13 ноя в 07:20 • 7 полных дней • Вылет 20 ноя в 08:15</div>
+                        <div id="countdown-text" class="text-xs sm:text-sm font-bold text-white truncate">Считаем дни...</div>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=The+Blue+Pearl+Kata+Hotel+Phuket" target="_blank" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-white flex items-center gap-1.5 transition active:scale-95 shrink-0">
+                    <i class="fa-solid fa-hotel text-cyan-400"></i> Отель Blue Pearl
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="max-w-md mx-auto px-4 pt-4">
+
+        <!-- ВКЛАДКА 1: МАРШРУТ НА 7 ДНЕЙ ОТДЫХА + ВЫЛЕТ -->
+        <section id="tab-itinerary" class="space-y-4">
+            <div class="flex items-center justify-between mb-1">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">7 дней отдыха (13–19 ноя) + вылет (20 ноя)</h2>
+                <span id="current-day-date" class="text-xs font-semibold text-cyan-400">Пт, 13 ноября</span>
+            </div>
+
+            <!-- Переключатель Дней 1-7 + Вылет 20 ноя -->
+            <div id="day-selector" class="flex gap-2 overflow-x-auto no-scrollbar pb-2"></div>
+
+            <!-- Сводка выбранного дня -->
+            <div id="day-hero-card" class="glass-card rounded-2xl p-4 border-l-4 border-l-cyan-400"></div>
+
+            <!-- Таймлайн карточек дня -->
+            <div id="day-timeline" class="space-y-3"></div>
+
+            <!-- База проживания -->
+            <div class="glass-card rounded-2xl p-4 border-l-4 border-l-emerald-400 mt-5">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <span class="text-[11px] uppercase tracking-wider font-bold text-emerald-400">Наша база (13 – 20 ноября, 7 ночей)</span>
+                        <h3 class="text-base font-bold text-white mt-0.5">The Blue Pearl Kata Hotel</h3>
+                        <p class="text-xs text-slate-300 mt-1">Пляж Ката (Kata Beach) — 5 минут пешком до моря, рядом ночной рынок Kata Night Market, 7-Eleven и массажные салоны.</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <a href="https://www.google.com/maps/search/?api=1&query=The+Blue+Pearl+Kata+Hotel+Phuket" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold text-center flex items-center justify-center gap-1.5 active:scale-95 transition">
+                        <i class="fa-solid fa-map-location-dot"></i> Открыть The Blue Pearl Kata на карте
+                    </a>
+                </div>
+            </div>
+
+            <!-- Интерактивный чек-лист -->
+            <div class="glass-card rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-white">Чек-лист перед вылетом ✈️</h3>
+                        <p class="text-xs text-slate-400">Личная проверка готовности к поездке</p>
+                    </div>
+                    <span id="checklist-progress" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300">0/7</span>
+                </div>
+                <div id="checklist-container" class="space-y-2"></div>
+            </div>
+        </section>
+
+        <!-- ВКЛАДКА 2: ОБЩАК / СЧЕТ (ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ И ПРАВА ДОСТУПА) -->
+        <section id="tab-split" class="hidden space-y-4">
+
+            <!-- Панель статуса прав доступа в Общаке -->
+            <div class="glass-card rounded-2xl p-3.5 border border-amber-500/30 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-xs font-extrabold text-white" id="split-role-title">Ваш статус: Виктор (👑 Админ)</span>
+                    </div>
+                    <p id="split-rules-summary" class="text-[11px] text-slate-300 mt-0.5 truncate">
+                        Обнуление долгов: Только Админы • Добавление чеков: Все
+                    </p>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <button onclick="openProfileModal()" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-cyan-300 border border-slate-700">
+                        Сменить
+                    </button>
+                    <button onclick="openPermissionsModal()" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-xs font-bold text-amber-300 border border-amber-500/40">
+                        <i class="fa-solid fa-sliders"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Блок 1: Участники (7 человек с индикацией ролей 👑) -->
+            <div class="glass-card rounded-2xl p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-user-group text-cyan-400"></i> Участники компании (7 чел.)
+                        </h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">👑 — есть право управлять счетом и обнулять долги</p>
+                    </div>
+                    <button onclick="handleToggleEditParticipants()" class="text-xs font-semibold text-cyan-300 bg-cyan-500/15 border border-cyan-500/30 px-2.5 py-1 rounded-xl active:scale-95 transition">
+                        <i class="fa-solid fa-pen mr-1"></i>Имена
+                    </button>
+                </div>
+
+                <!-- Бейджи имен -->
+                <div id="participants-badges" class="flex flex-wrap gap-1.5 mt-3"></div>
+
+                <!-- Скрытая панель редактирования имен -->
+                <div id="participants-editor" class="hidden mt-3 pt-3 border-t border-slate-700/80 space-y-2">
+                    <div id="participants-inputs-list" class="grid grid-cols-1 gap-2"></div>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="resetDefaultParticipantNames()" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 shrink-0">
+                            Сбросить к нашим именам
+                        </button>
+                        <button onclick="saveEditedParticipantNames()" class="flex-1 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
+                            Сохранить для всех
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок 2: Форма добавления расхода -->
+            <div class="glass-card rounded-2xl p-4 border border-cyan-500/25">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-emerald-400"></i> Добавить расход в общак
+                    </h2>
+                    <span class="text-[11px] text-slate-400">1$ ≈ 34.5฿</span>
+                </div>
+
+                <div class="space-y-3">
+                    <!-- Название траты + быстрые шаблоны -->
+                    <div>
+                        <label class="text-xs text-slate-300 font-medium block mb-1">За что платили?</label>
+                        <input id="exp-title" type="text" placeholder="Напр.: Ужин морепродукты, Минивэн, Катер" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-2">
+                            <button type="button" onclick="fillPresetExpense('🚕 Минивэн на 7 чел.', 840, 'THB')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 text-[11px] text-slate-300 border border-slate-700 shrink-0 active:scale-95">🚕 Минивэн 840฿</button>
+                            <button type="button" onclick="fillPresetExpense('🍤 Ужин морепродукты', 3500, 'THB')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 text-[11px] text-slate-300 border border-slate-700 shrink-0 active:scale-95">🍤 Ужин 3500฿</button>
+                            <button type="button" onclick="fillPresetExpense('🚤 Катер Пхи-Пхи', 14000, 'THB')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 text-[11px] text-slate-300 border border-slate-700 shrink-0 active:scale-95">🚤 Катер 14000฿</button>
+                            <button type="button" onclick="fillPresetExpense('🍹 Коктейли в бич-клабе', 2800, 'THB')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 text-[11px] text-slate-300 border border-slate-700 shrink-0 active:scale-95">🍹 Бар 2800฿</button>
+                        </div>
+                    </div>
+
+                    <!-- Сумма и валюта -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-2">
+                            <label class="text-xs text-slate-300 font-medium block mb-1">Сумма чека</label>
+                            <input id="exp-amount" type="number" inputmode="decimal" placeholder="3500" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-base font-bold text-white focus:outline-none focus:border-cyan-400">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-300 font-medium block mb-1">Валюта</label>
+                            <select id="exp-currency" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-2.5 py-2.5 text-sm font-bold text-cyan-300 focus:outline-none focus:border-cyan-400">
+                                <option value="THB">฿ THB</option>
+                                <option value="USD">$ USD</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Кто оплатил счет -->
+                    <div>
+                        <label class="text-xs text-slate-300 font-medium block mb-1">Кто оплатил чек?</label>
+                        <select id="exp-payer" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-white focus:outline-none focus:border-cyan-400"></select>
+                    </div>
+
+                    <!-- На кого делим (чекбоксы всех 7 участников) -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label class="text-xs text-slate-300 font-medium">На кого делим этот счет?</label>
+                            <button type="button" onclick="selectAllInvolved(true)" class="text-[11px] text-cyan-400 font-semibold hover:underline">Выбрать всех 7</button>
+                        </div>
+                        <div id="exp-involved-list" class="grid grid-cols-2 gap-1.5"></div>
+                    </div>
+
+                    <button type="button" onclick="addExpense()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-extrabold text-sm shadow-lg shadow-cyan-500/20 active:scale-95 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-receipt"></i> Записать в общий счет
+                    </button>
+                </div>
+            </div>
+
+            <!-- Блок 3: ИТОГИ: КТО СКОЛЬКО ДОЛЖЕН И ПЕРСОНАЛЬНОЕ ОБНУЛЕНИЕ -->
+            <div class="glass-card rounded-2xl p-4 border-l-4 border-l-amber-400 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced text-amber-400"></i> Итоги: Кто сколько должен
+                        </h2>
+                        <p id="total-trip-spent" class="text-xs text-slate-300 mt-0.5">Всего потрачено группой: 0 ฿</p>
+                    </div>
+                    <button onclick="copySummaryReport()" class="px-3 py-1.5 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold flex items-center gap-1.5 active:scale-95 transition">
+                        <i class="fa-regular fa-copy"></i> Отчет в чат
+                    </button>
+                </div>
+
+                <!-- Таблица баланса каждого из 7 участников с индивидуальной кнопкой "Обнулить" -->
+                <div>
+                    <div class="flex items-center justify-between text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-2">
+                        <span>Участник (Внес / Доля)</span>
+                        <span>Баланс и обнуление</span>
+                    </div>
+                    <div id="balances-list" class="space-y-2"></div>
+                </div>
+
+                <!-- Умная схема переводов: Кто -> Кому переводит -->
+                <div class="pt-3 border-t border-slate-700/80">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-money-bill-transfer"></i> Кому сколько перевести для расчета:
+                    </h3>
+                    <div id="transfers-list" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- Блок 4: История операций + глобальный сброс -->
+            <div class="glass-card rounded-2xl p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-cyan-400"></i> История трат и обнулений
+                    </h3>
+                    <button onclick="requestResetAllExpenses()" class="text-xs font-semibold text-rose-400 hover:text-rose-300 bg-rose-500/10 border border-rose-500/30 px-2.5 py-1 rounded-xl active:scale-95 transition">
+                        <i class="fa-solid fa-trash-can mr-1"></i>Сбросить всё
+                    </button>
+                </div>
+
+                <div id="expenses-history-list" class="space-y-2"></div>
+            </div>
+
+        </section>
+
+        <!-- ВКЛАДКА 3: РУЛЕТКА НА 7 ДРУЗЕЙ И ПОЛЕЗНАЯ ИНФО -->
+        <section id="tab-wheel" class="hidden space-y-4">
+            <div class="glass-card rounded-2xl p-4 text-center">
+                <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-semibold">Быстрое решение споров</span>
+                <h2 class="text-xl font-extrabold text-white mt-2">Рулетка на 7 друзей 🎲</h2>
+                <p class="text-xs text-slate-400 mt-1">Когда компания не может решить, кто выбирает ресторан или куда поехать вечером</p>
+
+                <!-- Переключатель режима рулетки -->
+                <div class="grid grid-cols-3 gap-2 mt-4">
+                    <button onclick="setRouletteMode('person')" id="mode-btn-person" class="py-2 px-2 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 transition">
+                        🙋‍♂️ Кто из 7?
+                    </button>
+                    <button onclick="setRouletteMode('dinner')" id="mode-btn-dinner" class="py-2 px-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 transition">
+                        🍜 Что едим?
+                    </button>
+                    <button onclick="setRouletteMode('evening')" id="mode-btn-evening" class="py-2 px-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 transition">
+                        🌅 Куда вечером?
+                    </button>
+                </div>
+
+                <!-- Табло рулетки -->
+                <div class="my-5 py-8 px-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 shadow-inner relative overflow-hidden">
+                    <div id="roulette-question" class="text-xs uppercase tracking-wider text-cyan-400 font-bold mb-2">
+                        Кто сегодня выбирает ресторан для всей группы?
+                    </div>
+                    <div id="roulette-display" class="text-2xl sm:text-3xl font-black text-white min-h-[44px] flex items-center justify-center">
+                        Нажми «Крутить!»
+                    </div>
+                </div>
+
+                <button onclick="spinRoulette()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-extrabold text-base shadow-lg shadow-cyan-500/25 active:scale-95 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-dice"></i> Крутить рулетку!
+                </button>
+            </div>
+
+            <!-- Быстрая памятка по Пхукету -->
+            <div class="glass-card rounded-2xl p-4 space-y-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> Памятка для нашей группы
+                </h3>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                        <div class="text-slate-400 font-medium">Такси на 7 чел.</div>
+                        <div class="text-white font-bold mt-0.5">Bolt / InDrive (XL)</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Выбирайте класс SUV или Minivan</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                        <div class="text-slate-400 font-medium">Туристическая полиция</div>
+                        <div class="text-emerald-400 font-extrabold mt-0.5">Тел: 1155</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Круглосуточно (есть англ./рус.)</div>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs space-y-1">
+                    <div class="font-bold text-amber-300">Полезные тайские фразы:</div>
+                    <div class="flex justify-between"><span>Привет / Спасибо (муж.):</span><b class="text-white">Саватди Кхрап / Кхоп Кхун Кхрап</b></div>
+                    <div class="flex justify-between"><span>Не слишком остро:</span><b class="text-white">Май Пхет (Mai Phet)</b></div>
+                    <div class="flex justify-between"><span>Счет, пожалуйста:</span><b class="text-white">Чек Бин (Check Bin)</b></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- МОДАЛЬНОЕ ОКНО 1: ВЫБОР СВОЕГО ПРОФИЛЯ ИЗ 7 УЧАСТНИКОВ -->
+    <div id="profile-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="glass-card rounded-2xl max-w-sm w-full p-5 border border-white/15 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-extrabold text-white">Кто вы из 7 участников?</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Выберите своё имя, чтобы приложение знало ваши права доступа</p>
+                </div>
+                <button onclick="closeProfileModal()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="profile-selector-list" class="space-y-1.5 max-h-72 overflow-y-auto pr-1"></div>
+
+            <div class="pt-2 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+                <span>Организатор по умолчанию: <b class="text-amber-300">Виктор 👑</b></span>
+                <button onclick="closeProfileModal(); openPermissionsModal();" class="text-cyan-400 font-bold hover:underline">
+                    Настроить права →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО 2: УПРАВЛЕНИЕ ПРАВАМИ ДОСТУПА (АДМИН-ПАНЕЛЬ ВИКТОРА) -->
+    <div id="permissions-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card rounded-2xl max-w-md w-full p-5 border border-amber-500/30 shadow-2xl space-y-4 my-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-extrabold text-white">Управление правами доступа</h3>
+                        <p class="text-[11px] text-slate-400">Настройка ролей и обнуления для всех 7 устройств</p>
+                    </div>
+                </div>
+                <button onclick="closePermissionsModal()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Блок разблокировки Админа (если текущий профиль не Админ или требуется PIN) -->
+            <div id="admin-lock-banner" class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-2.5">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock"></i> Защита настроек организатора
+                    </span>
+                    <span class="text-[11px] text-slate-400">PIN по умолчанию: <b class="text-white">2026</b></span>
+                </div>
+                <div class="flex gap-2">
+                    <input id="admin-pin-input" type="password" inputmode="numeric" placeholder="Введите PIN организатора" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
+                    <button onclick="unlockAdminWithPin()" class="px-3.5 py-2 rounded-xl bg-amber-500 text-slate-950 font-extrabold text-xs shrink-0 active:scale-95 transition">
+                        Разблокировать
+                    </button>
+                </div>
+            </div>
+
+            <!-- Контент настроек прав (активен для Виктора / Админа) -->
+            <div id="admin-controls-body" class="space-y-4">
+
+                <!-- 1. Глобальные правила: кто может обнулять, добавлять и удалять -->
+                <div class="space-y-2.5">
+                    <label class="text-xs font-bold uppercase tracking-wider text-cyan-400 block">
+                        1. Правила действий в «Общаке»
+                    </label>
+
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5">
+                        <div class="text-xs font-bold text-white">Кто может нажимать кнопку «Обнулить»?</div>
+                        <select id="rule-settle-mode" onchange="updateAccessRule('settleMode', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-amber-300 focus:outline-none">
+                            <option value="admins_only">👑 Только Виктор и назначенные Админы</option>
+                            <option value="admins_and_creditor">🤝 Админы + Тот, кому должны вернуть деньги</option>
+                            <option value="everyone">🌐 Все 7 участников</option>
+                        </select>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5">
+                        <div class="text-xs font-bold text-white">Кто может добавлять новые чеки?</div>
+                        <select id="rule-add-mode" onchange="updateAccessRule('addExpenseMode', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-cyan-300 focus:outline-none">
+                            <option value="everyone">🌐 Все 7 участников (рекомендуется)</option>
+                            <option value="admins_only">👑 Только Админы</option>
+                        </select>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5">
+                        <div class="text-xs font-bold text-white">Кто может удалять чеки и менять имена?</div>
+                        <select id="rule-delete-mode" onchange="updateAccessRule('deleteExpenseMode', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-rose-300 focus:outline-none">
+                            <option value="admins_only">👑 Только Виктор и Админы</option>
+                            <option value="everyone">🌐 Все участники</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 2. Назначение со-админов среди 7 участников -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                            2. Роли участников (Кому дать права 👑 Админа)
+                        </label>
+                    </div>
+                    <p class="text-[11px] text-slate-400">Нажми на переключатель напротив друга, чтобы дать или забрать права казначея (админа):</p>
+                    <div id="admin-roles-list" class="space-y-1.5 max-h-48 overflow-y-auto pr-1"></div>
+                </div>
+
+                <!-- 3. Смена PIN-кода организатора -->
+                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-2">
+                    <div class="text-xs">
+                        <div class="font-bold text-white">PIN-код организатора</div>
+                        <div class="text-[11px] text-slate-400">Для быстрого входа с чужого телефона</div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <input id="admin-new-pin" type="text" maxlength="8" class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-bold text-center text-amber-300" value="2026">
+                        <button onclick="saveNewAdminPin()" class="px-2.5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs">
+                            ОК
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="closePermissionsModal()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-extrabold text-xs">
+                Готово (Синхронизировано)
+            </button>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО 3: ИНСТРУКЦИЯ КАК РАЗМЕСТИТЬ ОНЛАЙН И ДОБАВИТЬ В TELEGRAM -->
+    <div id="tg-guide-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card rounded-2xl max-w-md w-full p-5 border border-cyan-500/30 shadow-2xl space-y-4 my-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 text-lg">
+                        <i class="fa-brands fa-telegram"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-extrabold text-white">Как добавить гид в ваш чат</h3>
+                        <p class="text-[11px] text-slate-400">Пошаговая шпаргалка на 3 минуты</p>
+                    </div>
+                </div>
+                <button onclick="closeTgGuideModal()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed text-slate-200 max-h-[68vh] overflow-y-auto pr-1">
+                <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5">
+                    <div class="font-extrabold text-cyan-400 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-[11px]">1</span>
+                        Размести этот HTML-файл онлайн (бесплатно)
+                    </div>
+                    <p class="text-slate-300">Скачай этот файл как <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">index.html</code> и перетащи его мышкой на любой из бесплатных хостингов:</p>
+                    <ul class="list-disc list-inside text-slate-300 space-y-1 pt-1">
+                        <li><b class="text-white">app.netlify.com/drop</b> — просто перетащи файл в окно браузера, и сразу получишь вечную <code class="text-emerald-300">https://...netlify.app</code> ссылку.</li>
+                        <li><b class="text-white">tiiny.host</b> — загрузи <code class="text-amber-300">index.html</code>, впиши имя (например, <code class="text-cyan-300">phuket-2026</code>) и нажми Publish.</li>
+                    </ul>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5">
+                    <div class="font-extrabold text-emerald-400 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-[11px]">2</span>
+                        Создай бота и мини-апп в @BotFather
+                    </div>
+                    <ol class="list-decimal list-inside text-slate-300 space-y-1 pt-1">
+                        <li>Открой в Telegram <b class="text-white">@BotFather</b> и отправь <code class="text-amber-300">/newbot</code>.</li>
+                        <li>Назови бота <b class="text-white">Пхукет 2026 Гид</b>, а юзернейм — например <code class="text-cyan-300">phuket2026_7friends_bot</code>.</li>
+                        <li>Отправь команду <code class="text-amber-300">/newapp</code>, выбери своего бота, введи название, загрузи любую картинку 640×360, на шаге GIF отправь <code class="text-amber-300">/empty</code>, затем вставь свою <code class="text-emerald-300">https://</code> ссылку и короткое имя <code class="text-cyan-300">guide</code>.</li>
+                    </ol>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5">
+                    <div class="font-extrabold text-amber-400 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center text-[11px]">3</span>
+                        Добавь кнопку прямо в вашу общую группу
+                    </div>
+                    <p class="text-slate-300">Скопируй полученную от BotFather ссылку вида <code class="text-cyan-300">https://t.me/phuket2026_7friends_bot/guide</code>, отправь её в ваш чат на 7 человек и нажми <b class="text-white">«Закрепить» (Pin)</b>! У всех появится красивая кнопка запуска прямо внутри Telegram.</p>
+                </div>
+            </div>
+
+            <button onclick="closeTgGuideModal()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-extrabold text-xs">
+                Понятно, закрыть шпаргалку
+            </button>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ -->
+    <div id="confirm-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="glass-card rounded-2xl max-w-sm w-full p-5 border border-white/15 shadow-2xl">
+            <h3 id="modal-title" class="text-base font-extrabold text-white">Подтверждение</h3>
+            <p id="modal-desc" class="text-xs text-slate-300 mt-1.5 leading-relaxed"></p>
+            <div class="flex gap-2 mt-4">
+                <button onclick="closeConfirmModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs">
+                    Отмена
+                </button>
+                <button id="modal-confirm-btn" class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-xs">
+                    Подтвердить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ (TOAST) -->
+    <div id="toast" class="fixed top-14 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-emerald-500 text-slate-950 font-extrabold text-xs shadow-2xl flex items-center gap-2 max-w-[90vw] text-center">
+        <i class="fa-solid fa-circle-check shrink-0"></i>
+        <span id="toast-message">Готово!</span>
+    </div>
+
+    <!-- НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ -->
+    <nav class="fixed bottom-0 left-0 right-0 glass-nav z-40 px-3 py-2">
+        <div class="max-w-md mx-auto grid grid-cols-3 gap-2">
+            <button onclick="switchTab('itinerary')" id="nav-itinerary" class="flex flex-col items-center justify-center py-2 rounded-xl text-cyan-400 bg-cyan-500/15 font-bold transition">
+                <i class="fa-solid fa-map-location-dot text-base mb-0.5"></i>
+                <span class="text-xs">Маршрут</span>
+            </button>
+            <button onclick="switchTab('split')" id="nav-split" class="flex flex-col items-center justify-center py-2 rounded-xl text-slate-400 hover:text-slate-200 font-medium transition">
+                <i class="fa-solid fa-wallet text-base mb-0.5"></i>
+                <span class="text-xs">Общак / Счет</span>
+            </button>
+            <button onclick="switchTab('wheel')" id="nav-wheel" class="flex flex-col items-center justify-center py-2 rounded-xl text-slate-400 hover:text-slate-200 font-medium transition">
+                <i class="fa-solid fa-dice text-base mb-0.5"></i>
+                <span class="text-xs">Рулетка & Инфо</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ЛОГИКА ПРИЛОЖЕНИЯ + FIREBASE REAL-TIME SYNC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // КОНСТАНТА КУРСА USD -> THB
+        const USD_TO_THB_RATE = 34.5;
+
+        // 1. МАРШРУТ ПОЕЗДКИ: 7 ДНЕЙ ОТДЫХА (13–19 НОЯБРЯ) + ВЫЛЕТ 20 НОЯБРЯ В 08:15
+        const itineraryData = [
+            {
+                day: 1,
+                shortTab: "День 1",
+                shortDate: "13 ноя",
+                date: "Пт, 13 ноября",
+                title: "Прилет в 07:20 (Centrum Air), трансфер в Кату, заселение, море и приветственный ужин",
+                vibe: "Прилет & Море 🏖️",
+                summary: "Первый день из 7 дней отдыха! Прилетаем в 07:20 утра из Ташкента. Благодаря утреннему прибытию у нас впереди целый день: пляж Ката, свежие манго-шейки и знакомство с островом.",
+                items: [
+                    {
+                        id: "d1_1",
+                        time: "Утро • 07:20 – 08:30",
+                        icon: "fa-plane-arrival",
+                        color: "text-cyan-400",
+                        title: "Прилет в аэропорт Пхукета (HKT) в 07:20 (Centrum Air)",
+                        desc: "Проходим паспортный контроль, забираем багаж, подключаем тайские eSIM / SIM-карты и меняем немного валюты на первые расходы.",
+                        placeQuery: "Phuket International Airport HKT",
+                        placeLabel: "Аэропорт HKT"
+                    },
+                    {
+                        id: "d1_2",
+                        time: "Трансфер • 08:30 – 10:00",
+                        icon: "fa-van-shuttle",
+                        color: "text-emerald-400",
+                        title: "Групповой трансфер на минивэне (7 чел. с багажом) в отель",
+                        desc: "Едем всей семеркой на юг острова (~45 км) прямиком к отелю The Blue Pearl Kata Hotel.",
+                        placeQuery: "The Blue Pearl Kata Hotel Phuket",
+                        placeLabel: "Маршрут в отель"
+                    },
+                    {
+                        id: "d1_3",
+                        time: "День • 10:00 – 14:00",
+                        icon: "fa-umbrella-beach",
+                        color: "text-amber-400",
+                        title: "Багаж на ресепшен, пляж Ката (Kata Beach) и первый обед",
+                        desc: "Оставляем чемоданы в отеле, меняем доллары по лучшему курсу, сразу идем купаться на пляж Ката и вкусно обедаем у моря еще до заселения.",
+                        placeQuery: "Kata Beach Phuket",
+                        placeLabel: "Пляж Ката"
+                    },
+                    {
+                        id: "d1_4",
+                        time: "День • 14:00",
+                        icon: "fa-bed",
+                        color: "text-cyan-400",
+                        title: "Официальное заселение в The Blue Pearl Kata Hotel",
+                        desc: "Получаем номера, душ, распаковка и небольшой отдых у бассейна.",
+                        placeQuery: "The Blue Pearl Kata Hotel Phuket",
+                        placeLabel: "Отель на карте"
+                    },
+                    {
+                        id: "d1_5",
+                        time: "Закат • 17:30 – 21:00",
+                        icon: "fa-bowl-food",
+                        color: "text-rose-400",
+                        title: "Первый закат на пляже и приветственный ужин с морепродуктами",
+                        desc: "Встречаем тропический закат в 17:30 и всей компанией празднуем старт отпуска креветками на гриле, рыбой и Том Ямом!",
+                        placeQuery: "Kata Night Market Phuket",
+                        placeLabel: "Ночной рынок"
+                    }
+                ]
+            },
+            {
+                day: 2,
+                shortTab: "День 2",
+                shortDate: "14 ноя",
+                date: "Сб, 14 ноября",
+                title: "Южные бухты: Ката Ной, Най Харн, каяки на Януи, закат на Промтхеп и Патонг",
+                vibe: "Юг & Bangla Road 🔥",
+                summary: "2-й день отдыха: лучшие пляжи юга острова, снорклинг и прозрачные каяки в бухте Януи, эпичный закат на мысе Промтхеп и субботний выезд на Бангла Роуд.",
+                items: [
+                    {
+                        id: "d2_1",
+                        time: "Утро • 09:30",
+                        icon: "fa-water",
+                        color: "text-cyan-400",
+                        title: "Утренний релакс в живописной бухте Ката Ной (Kata Noi Beach)",
+                        desc: "Уютный чистый пляж с мягким песком всего в 5 минутах от нашего отеля.",
+                        placeQuery: "Kata Noi Beach Phuket",
+                        placeLabel: "Ката Ной"
+                    },
+                    {
+                        id: "d2_2",
+                        time: "День • 12:30 – 16:30",
+                        icon: "fa-person-swimming",
+                        color: "text-emerald-400",
+                        title: "Пляж Най Харн (Nai Harn) и каякинг/снорклинг на Yanui Beach",
+                        desc: "Купаемся на широком пляже Най Харн, затем берем каяки и маски в скалистой бухте Януи.",
+                        placeQuery: "Yanui Beach Phuket",
+                        placeLabel: "Януи на карте"
+                    },
+                    {
+                        id: "d2_3",
+                        time: "Закат • 17:30",
+                        icon: "fa-sun",
+                        color: "text-amber-400",
+                        title: "Мыс Промтхеп (Promthep Cape) на закате",
+                        desc: "Самая южная точка Пхукета с открыточным видом на океан и пальмы.",
+                        placeQuery: "Promthep Cape Phuket",
+                        placeLabel: "Мыс Промтхеп"
+                    },
+                    {
+                        id: "d2_4",
+                        time: "Вечер • 21:00",
+                        icon: "fa-bolt",
+                        color: "text-rose-400",
+                        title: "Субботняя атмосфера Bangla Road (Патонг)",
+                        desc: "Ночная жизнь острова: живая музыка, клубы и бары Патонга для желающих оторваться.",
+                        placeQuery: "Bangla Road Patong Phuket",
+                        placeLabel: "Бангла на карте"
+                    }
+                ]
+            },
+            {
+                day: 3,
+                shortTab: "День 3",
+                shortDate: "15 ноя",
+                date: "Вс, 15 ноября",
+                title: "Воскресенье! Karon Viewpoint, храм Ват Чалонг и ярмарка Lard Yai в Old Town",
+                vibe: "Old Town & Ярмарка 🏮",
+                summary: "3-й день отдыха: смотрим панораму трех пляжей, посещаем главный буддийский храм Ват Чалонг, а с 16:30 погружаемся в воскресную ярмарку Lard Yai в Старом городе.",
+                items: [
+                    {
+                        id: "d3_1",
+                        time: "День • 12:30",
+                        icon: "fa-mountain-sun",
+                        color: "text-emerald-400",
+                        title: "Смотровая площадка Karon Viewpoint (Три Пляжа)",
+                        desc: "Делаем совместные кадры всей группы с панорамой Ката Ной, Ката и Карон.",
+                        placeQuery: "Karon Viewpoint Phuket",
+                        placeLabel: "Смотровая"
+                    },
+                    {
+                        id: "d3_2",
+                        time: "День • 14:00",
+                        icon: "fa-gopuram",
+                        color: "text-amber-400",
+                        title: "Храм Ват Чалонг (Wat Chalong)",
+                        desc: "Самый красивый и почитаемый храмовый комплекс Пхукета. Потребуется закрытая одежда (плечи и колени).",
+                        placeQuery: "Wat Chalong Phuket",
+                        placeLabel: "Ват Чалонг"
+                    },
+                    {
+                        id: "d3_3",
+                        time: "Вечер • 16:30 – 21:30",
+                        icon: "fa-wand-magic-sparkles",
+                        color: "text-rose-400",
+                        title: "Воскресная пешеходная улица Lard Yai на Thalang Road (Old Town)",
+                        desc: "Ярмарка работает ТОЛЬКО по воскресеньям: колониальные дома Soi Romanee, живая музыка, крафтовые сувениры и стритфуд.",
+                        placeQuery: "Lard Yai Sunday Night Market Phuket",
+                        placeLabel: "Рынок Lard Yai"
+                    }
+                ]
+            },
+            {
+                day: 4,
+                shortTab: "День 4",
+                shortDate: "16 ноя",
+                date: "Пн, 16 ноября",
+                title: "Морская экскурсия на острова Пхи-Пхи (Maya Bay, Пиле, Бамбу) на весь день",
+                vibe: "Острова Пхи-Пхи 🚤",
+                summary: "4-й день отдыха: экватор поездки! Отправляемся на скоростном катере к Майя Бэй, купаемся в изумрудных водах лагуны Пиле и отдыхаем на белоснежном Бамбуковом острове.",
+                items: [
+                    {
+                        id: "d4_1",
+                        time: "Утро • 07:30 – 11:30",
+                        icon: "fa-ship",
+                        color: "text-cyan-400",
+                        title: "Спидбот к островам: бухта Майя Бэй (Maya Bay) и лагуна Пиле",
+                        desc: "Легендарная бухта из фильма «Пляж», купание с катера в бирюзовой лагуне Pileh Lagoon и пещера Викингов.",
+                        placeQuery: "Maya Bay Phi Phi",
+                        placeLabel: "Майя Бэй"
+                    },
+                    {
+                        id: "d4_2",
+                        time: "День • 12:30 – 17:30",
+                        icon: "fa-fish",
+                        color: "text-emerald-400",
+                        title: "Снорклинг с рыбками, Monkey Beach и отдых на Bamboo Island",
+                        desc: "Снорклинг над коралловыми рифами, обед на Пхи-Пхи Дон и белоснежный пляж острова Бамбу.",
+                        placeQuery: "Bamboo Island Krabi",
+                        placeLabel: "Бамбу"
+                    },
+                    {
+                        id: "d4_3",
+                        time: "Вечер • 19:30",
+                        icon: "fa-spa",
+                        color: "text-amber-400",
+                        title: "Тайский массаж ног и алоэ-вера после морского дня",
+                        desc: "Снимаем усталость в салоне рядом с отелем и спокойно ужинаем на Кате.",
+                        placeQuery: "Kata Beach Massage Phuket",
+                        placeLabel: "Салоны Каты"
+                    }
+                ]
+            },
+            {
+                day: 5,
+                shortTab: "День 5",
+                shortDate: "17 ноя",
+                date: "Вт, 17 ноября",
+                title: "День релакса: дикий пляж Freedom Beach и закатное панорамное кафе на скале",
+                vibe: "Релакс & Закат 🍹",
+                summary: "5-й день отдыха: без спешки и ранних будильников. Плывем на лонгтейле на уединенный пляж Фридом, а вечер проводим в уютном баре на скале над океаном.",
+                items: [
+                    {
+                        id: "d5_1",
+                        time: "Утро • 10:30",
+                        icon: "fa-umbrella-beach",
+                        color: "text-cyan-400",
+                        title: "Дикий пляж Freedom Beach (лодка или спуск через джунгли)",
+                        desc: "Один из самых красивых и уединенных пляжей Пхукета с прозрачнейшей водой.",
+                        placeQuery: "Freedom Beach Phuket",
+                        placeLabel: "Пляж Фридом"
+                    },
+                    {
+                        id: "d5_2",
+                        time: "Закат • 16:30",
+                        icon: "fa-martini-glass-citrus",
+                        color: "text-amber-400",
+                        title: "Закат в панорамном кафе (After Beach Bar / A Blanket & A Pillow)",
+                        desc: "Вид на закатное солнце с деревянной террасы, коктейли и фотосессия на память.",
+                        placeQuery: "After Beach Bar Phuket",
+                        placeLabel: "Панорамный бар"
+                    },
+                    {
+                        id: "d5_3",
+                        time: "Вечер • 20:00",
+                        icon: "fa-bowl-rice",
+                        color: "text-emerald-400",
+                        title: "Прогулка по ночному рынку Каты и фруктовые шейки",
+                        desc: "Пробуем жареное мороженое, морепродукты и блинчики роти.",
+                        placeQuery: "Kata Night Market Phuket",
+                        placeLabel: "Рынок Ката"
+                    }
+                ]
+            },
+            {
+                day: 6,
+                shortTab: "День 6",
+                shortDate: "18 ноя",
+                date: "Ср, 18 ноября",
+                title: "Залив Пханг Нга: смотровая Samet Nangshe, остров Бонда и каноэ в пещерах",
+                vibe: "Скалы & Каноэ 🛶",
+                summary: "6-й день отдыха: грандиозные карстовые скалы Пханг Нга, заплыв на каноэ сквозь гроты внутрь острова Хонг и панорама Samet Nangshe.",
+                items: [
+                    {
+                        id: "d6_1",
+                        time: "Утро • 08:30",
+                        icon: "fa-mountain",
+                        color: "text-emerald-400",
+                        title: "Смотровая площадка Samet Nangshe Viewpoint",
+                        desc: "Космический панорамный вид сверху на весь залив с сотнями островков.",
+                        placeQuery: "Samet Nangshe Viewpoint",
+                        placeLabel: "Samet Nangshe"
+                    },
+                    {
+                        id: "d6_2",
+                        time: "День • 11:30",
+                        icon: "fa-anchor",
+                        color: "text-cyan-400",
+                        title: "Остров Джеймса Бонда и каноэ сквозь скальные гроты",
+                        desc: "Инструкторы везут нас на каноэ под низкими сводами пещер в скрытые внутренние лагуны.",
+                        placeQuery: "James Bond Island Phang Nga",
+                        placeLabel: "Остров Бонда"
+                    },
+                    {
+                        id: "d6_3",
+                        time: "День • 14:30",
+                        icon: "fa-compass",
+                        color: "text-amber-400",
+                        title: "Плавучая деревня морских цыган Ко Паньи (Koh Panyee)",
+                        desc: "Обед со свежей рыбой в поселке на сваях прямо посреди воды.",
+                        placeQuery: "Koh Panyee Phang Nga",
+                        placeLabel: "Ко Паньи"
+                    }
+                ]
+            },
+            {
+                day: 7,
+                shortTab: "День 7 🎉",
+                shortDate: "19 ноя",
+                date: "Чт, 19 ноября",
+                title: "Финальный 7-й день отдыха: море, корзинки с манго, сборы и прощальный гала-ужин!",
+                vibe: "Финал & Гала-ужин 🦞",
+                summary: "Последний полноценный день отдыха! Купаемся, закупаем фрукты в пластиковые корзины, собираем чемоданы с вечера и устраиваем праздничный прощальный ужин всей семеркой.",
+                items: [
+                    {
+                        id: "d7_1",
+                        time: "Утро • 10:00",
+                        icon: "fa-water",
+                        color: "text-cyan-400",
+                        title: "Заключительный заплыв на пляже Ката и кокосы у моря",
+                        desc: "Наслаждаемся теплым океаном и солнцем по максимуму в наш крайний день на пляже.",
+                        placeQuery: "Kata Beach Phuket",
+                        placeLabel: "Пляж Ката"
+                    },
+                    {
+                        id: "d7_2",
+                        time: "День • 14:00",
+                        icon: "fa-bag-shopping",
+                        color: "text-emerald-400",
+                        title: "Шопинг: манго в корзинки, сувениры и тайские бальзамы",
+                        desc: "Покупаем спелое желтое манго, упаковываем в специальные корзины для ручной клади, берем соусы и подарки домой.",
+                        placeQuery: "Central Phuket Floresta",
+                        placeLabel: "Central Phuket"
+                    },
+                    {
+                        id: "d7_3",
+                        time: "Вечер • 18:00 – 22:00",
+                        icon: "fa-shrimp",
+                        color: "text-rose-400",
+                        title: "Прощальный гала-ужин всей компанией и сбор чемоданов с вечера!",
+                        desc: "Празднуем классный отдых, подводим итоги в «Общаке / Счете», обнуляем долги и собираем чемоданы, так как выезд завтра в 04:45 утра!",
+                        placeQuery: "Kata Beach Seafood Restaurant Phuket",
+                        placeLabel: "Рестораны у моря"
+                    }
+                ]
+            },
+            {
+                day: 8,
+                shortTab: "Вылет ✈️",
+                shortDate: "20 ноя",
+                date: "Пт, 20 ноября (Вылет)",
+                title: "Утренний вылет в 08:15 (Centrum Air): чек-аут в 04:15 и трансфер в 04:45",
+                vibe: "Вылет в 08:15 ✈️",
+                summary: "20 ноября у нас только утренний трансфер и рейс домой! Чтобы не переживать в аэропорту, выезжаем ровно в 04:45 утра и доезжаем без пробок за 55 минут.",
+                items: [
+                    {
+                        id: "d8_1",
+                        time: "Утро • 04:15 – 04:30",
+                        icon: "fa-key",
+                        color: "text-amber-400",
+                        title: "Ранний подъем и чек-аут в The Blue Pearl Kata Hotel",
+                        desc: "Сдаем ключи. ВАЖНО: проверяем сейфы номеров (паспорта, деньги, телефоны) и забираем возвратный депозит за проживание!",
+                        placeQuery: "The Blue Pearl Kata Hotel Phuket",
+                        placeLabel: "Отель"
+                    },
+                    {
+                        id: "d8_2",
+                        time: "Трансфер • 04:45 – 05:45",
+                        icon: "fa-van-shuttle",
+                        color: "text-emerald-400",
+                        title: "Минивэн на 7 человек в аэропорт HKT (выезд в 04:45)",
+                        desc: "Ранним утром трасса свободна — комфортно доезжаем до международного терминала за ~55 минут.",
+                        placeQuery: "Phuket International Airport HKT",
+                        placeLabel: "Маршрут в HKT"
+                    },
+                    {
+                        id: "d8_3",
+                        time: "Аэропорт • 05:45 – 08:15",
+                        icon: "fa-plane-departure",
+                        color: "text-cyan-400",
+                        title: "Прибытие в HKT (05:45), регистрация, багаж и вылет в 08:15 ✈️",
+                        desc: "Приезжаем за 2.5 часа до рейса, проходим контроль, корзинки с манго берем в ручную кладь и вылетаем в 08:15 утра домой!",
+                        placeQuery: "Phuket International Airport International Terminal",
+                        placeLabel: "Терминал вылета"
+                    }
+                ]
+            }
+        ];
+
+        const defaultChecklist = [
+            { id: "c1", text: "Загранпаспорт (срок действия минимум 6 мес.)" },
+            { id: "c2", text: "Скачать офлайн-карту Пхукета в Google Maps" },
+            { id: "c3", text: "Установить приложения такси Bolt и InDrive" },
+            { id: "c4", text: "Взять доллары нового образца (синие купюры $100)" },
+            { id: "c5", text: "Крем SPF 50+ и головной убор" },
+            { id: "c6", text: "Аквашузы или удобные сандалии для катеров" },
+            { id: "c7", text: "Повербанк и водонепроницаемый чехол для телефона" }
+        ];
+
+        const DEFAULT_PARTICIPANTS = [
+            "Виктор",
+            "Юля",
+            "Даша",
+            "Саша",
+            "Наташа",
+            "Арина",
+            "Феруза"
+        ];
+
+        const DEFAULT_EXPENSES = [
+            {
+                id: "demo-1",
+                title: "🚕 Минивэн из аэропорта HKT в отель Ката",
+                amountThb: 840,
+                originalAmount: 840,
+                currency: "THB",
+                payerIndex: 0, // Виктор
+                involvedIndices: [0, 1, 2, 3, 4, 5, 6],
+                isSettlement: false,
+                createdBy: "Виктор",
+                createdAt: "13 ноя • 08:30"
+            }
+        ];
+
+        const DEFAULT_PERMISSIONS = {
+            adminIndices: [0], // По умолчанию Виктор (#0) — Главный Админ
+            adminPin: "2026",
+            settleMode: "admins_only",       // 'admins_only' | 'admins_and_creditor' | 'everyone'
+            addExpenseMode: "everyone",      // 'everyone' | 'admins_only'
+            deleteExpenseMode: "admins_only" // 'admins_only' | 'everyone'
+        };
+
+        // ГЛОБАЛЬНОЕ СОСТОЯНИЕ
+        let currentDayIndex = 0;
+        let currentRouletteMode = 'person';
+
+        // Текущий выбранный профиль на этом устройстве (0 = Виктор по умолчанию)
+        let myProfileIndex = parseInt(localStorage.getItem("phuket2026_my_profile_idx") || "0", 10);
+        if (isNaN(myProfileIndex) || myProfileIndex < 0 || myProfileIndex > 6) myProfileIndex = 0;
+
+        // Разблокировал ли пользователь PIN-код Админа на этом устройстве
+        let isPinUnlockedOnDevice = localStorage.getItem("phuket2026_pin_unlocked") === "true";
+
+        let participants = [...DEFAULT_PARTICIPANTS];
+        let expenses = [...DEFAULT_EXPENSES];
+        let permissions = { ...DEFAULT_PERMISSIONS };
+        let itineraryVotes = {}; // { itemId: [participantIndex, ...] }
+
+        // FIREBASE ПЕРЕМЕННЫЕ
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let isCloudConnected = false;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'phuket-2026-trip-7friends';
+
+        // ИНИЦИАЛИЗАЦИЯ TELEGRAM WEBAPP SDK (если открыто внутри Telegram)
+        function initTelegramWebApp() {
+            try {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    const tg = window.Telegram.WebApp;
+                    tg.ready();
+                    tg.expand();
+                }
+            } catch (err) {
+                console.warn("Telegram WebApp SDK init skipped:", err);
+            }
+        }
+
+        // ЗАГРУЗКА ЛОКАЛЬНОГО РЕЗЕРВА (ДО ПОДКЛЮЧЕНИЯ FIREBASE)
+        function loadLocalFallback() {
+            try {
+                const lp = localStorage.getItem("phuket2026_state_v4_named");
+                if (lp) {
+                    const parsed = JSON.parse(lp);
+                    if (Array.isArray(parsed.participants) && parsed.participants.length === 7) {
+                        participants = parsed.participants.map((name, i) =>
+                            (!name || /^Друг \d+$/.test(name.trim())) ? DEFAULT_PARTICIPANTS[i] : name
+                        );
+                    }
+                    if (Array.isArray(parsed.expenses)) {
+                        expenses = parsed.expenses;
+                    }
+                    if (parsed.permissions) {
+                        permissions = { ...DEFAULT_PERMISSIONS, ...parsed.permissions };
+                        if (!Array.isArray(permissions.adminIndices) || permissions.adminIndices.length === 0) {
+                            permissions.adminIndices = [0];
+                        }
+                    }
+                    if (parsed.itineraryVotes) {
+                        itineraryVotes = parsed.itineraryVotes;
+                    }
+                }
+            } catch (e) {
+                console.warn("Local fallback load error:", e);
+            }
+        }
+
+        function saveLocalFallback() {
+            try {
+                localStorage.setItem("phuket2026_state_v4_named", JSON.stringify({
+                    participants,
+                    expenses,
+                    permissions,
+                    itineraryVotes
+                }));
+            } catch (e) {
+                console.warn("Local fallback save error:", e);
+            }
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ FIREBASE FIRESTORE (ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ НА 7 ТЕЛЕФОНОВ)
+        async function initFirebaseSync() {
+            try {
+                if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+                    updateSyncBadge(false);
+                    return;
+                }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // RULE 3: Auth Before Queries
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                    if (user) {
+                        subscribeToSharedTripState();
+                    }
+                });
+            } catch (err) {
+                console.warn("Работаем в автономном режиме (локальное хранилище):", err);
+                updateSyncBadge(false);
+            }
+        }
+
+        function subscribeToSharedTripState() {
+            if (! currentUser || !db) return;
+            // RULE 1: Strict Public Path
+            const stateDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'phuket_trip_state', 'main_group_doc');
+
+            onSnapshot(
+                stateDocRef,
+                (snapshot) => {
+                    isCloudConnected = true;
+                    updateSyncBadge(true);
+                    if (snapshot.exists()) {
+                        const data = snapshot.data();
+                        let needsNameMigration = false;
+                        if (Array.isArray(data.participants) && data.participants.length === 7) {
+                            participants = data.participants.map((name, i) => {
+                                if (!name || /^Друг \d+$/.test(name.trim())) {
+                                    needsNameMigration = true;
+                                    return DEFAULT_PARTICIPANTS[i];
+                                }
+                                return name;
+                            });
+                        }
+                        if (Array.isArray(data.expenses)) {
+                            expenses = data.expenses;
+                        }
+                        if (data.permissions) {
+                            permissions = { ...DEFAULT_PERMISSIONS, ...data.permissions };
+                            if (!permissions.adminIndices || !permissions.adminIndices.includes(0)) {
+                                permissions.adminIndices = Array.from(new Set([0, ...(permissions.adminIndices || [])]));
+                            }
+                        }
+                        if (data.itineraryVotes && typeof data.itineraryVotes === 'string') {
+                            try {
+                                itineraryVotes = JSON.parse(data.itineraryVotes);
+                            } catch (e) {
+                                itineraryVotes = {};
+                            }
+                        }
+                        saveLocalFallback();
+                        refreshAllUI();
+                        if (needsNameMigration) {
+                            pushStateToCloud();
+                        }
+                    } else {
+                        // Если документа еще нет в облаке — создаем начальный
+                        pushStateToCloud();
+                    }
+                },
+                (error) => {
+                    console.warn("Firestore snapshot error:", error);
+                    updateSyncBadge(false);
+                }
+            );
+        }
+
+        async function pushStateToCloud() {
+            saveLocalFallback();
+            refreshAllUI();
+            if (!currentUser || !db) return;
+            try {
+                const stateDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'phuket_trip_state', 'main_group_doc');
+                await setDoc(stateDocRef, {
+                    participants,
+                    expenses,
+                    permissions,
+                    itineraryVotes: JSON.stringify(itineraryVotes),
+                    updatedAt: Date.now()
+                });
+            } catch (e) {
+                console.warn("Cloud push error:", e);
+            }
+        }
+
+        function updateSyncBadge(online) {
+            const dot = document.getElementById("sync-indicator");
+            if (!dot) return;
+            if (online) {
+                dot.className = "w-2 h-2 rounded-full bg-emerald-400 pulse-dot shrink-0";
+                dot.title = "Синхронизировано в облаке для всех 7 участников";
+            } else {
+                dot.className = "w-2 h-2 rounded-full bg-amber-400 shrink-0";
+                dot.title = "Сохранено на устройстве";
+            }
+        }
+
+        // ПРОВЕРКА ПРАВ ДОСТУПА ТЕКУЩЕГО ПОЛЬЗОВАТЕЛЯ
+        function isCurrentUserAdmin() {
+            const adminList = permissions.adminIndices || [0];
+            return adminList.includes(myProfileIndex) || isPinUnlockedOnDevice;
+        }
+
+        function canUserAddExpense() {
+            if (isCurrentUserAdmin()) return true;
+            return permissions.addExpenseMode === "everyone";
+        }
+
+        function canUserDeleteOrRename() {
+            if (isCurrentUserAdmin()) return true;
+            return permissions.deleteExpenseMode === "everyone";
+        }
+
+        // Проверка: может ли текущий участник нажать кнопку "Обнулить" для участника targetIndex с балансом targetNet
+        function canUserSettleParticipant(targetIndex, targetNet) {
+            if (isCurrentUserAdmin()) return true;
+            if (permissions.settleMode === "everyone") return true;
+            if (permissions.settleMode === "admins_and_creditor") {
+                // Если самому текущему пользователю должны деньги (он кредитор) или обнуляется его баланс в плюс
+                const { net } = calculateBalancesData();
+                const myNet = Math.round(net[myProfileIndex] || 0);
+                if (myNet > 1) return true;
+            }
+            return false;
+        }
+
+        // ОБНОВЛЕНИЕ ВСЕГО ИНТЕРФЕЙСА
+        function refreshAllUI() {
+            renderHeaderAndRoleStatus();
+            renderDaySelector();
+            selectDay(currentDayIndex);
+            renderParticipantsUI();
+            renderSplitBalancesAndHistory();
+            renderPermissionsModalContent();
+        }
+
+        function renderHeaderAndRoleStatus() {
+            const myName = participants[myProfileIndex] || "Участник";
+            const isAdmin = isCurrentUserAdmin();
+            const roleIcon = isAdmin ? "👑 Админ" : "👤 Участник";
+
+            const headerBadge = document.getElementById("current-user-badge");
+            if (headerBadge) {
+                headerBadge.textContent = `Вы: ${myName} (${isAdmin ? '👑' : '👤'})`;
+            }
+
+            const splitRoleTitle = document.getElementById("split-role-title");
+            if (splitRoleTitle) {
+                splitRoleTitle.innerHTML = `Вы вошли как: <span class="text-cyan-300">${escapeHtml(myName)}</span> <span class="px-2 py-0.5 rounded-md text-[10px] ${isAdmin ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-slate-800 text-slate-300'}">${roleIcon}</span>`;
+            }
+
+            const settleMap = {
+                admins_only: "Только Админы 👑",
+                admins_and_creditor: "Админы + Получатель 🤝",
+                everyone: "Все участники 🌐"
+            };
+            const addMap = {
+                everyone: "Все 7 чел.",
+                admins_only: "Только Админы"
+            };
+
+            const rulesSummary = document.getElementById("split-rules-summary");
+            if (rulesSummary) {
+                rulesSummary.textContent = `Обнуление: ${settleMap[permissions.settleMode] || 'Только Админы'} • Чеки: ${addMap[permissions.addExpenseMode] || 'Все'}`;
+            }
+        }
+
+        // МОДАЛЬНОЕ ОКНО ВЫБОРА ПРОФИЛЯ ("КТО ВЫ ИЗ 7 ДРУЗЕЙ?")
+        window.openProfileModal = function() {
+            const modal = document.getElementById("profile-modal");
+            const list = document.getElementById("profile-selector-list");
+            const adminList = permissions.adminIndices || [0];
+
+            list.innerHTML = participants.map((name, idx) => {
+                const isMe = idx === myProfileIndex;
+                const isAdm = adminList.includes(idx);
+                return `
+                    <button onclick="selectMyProfile(${idx})" class="w-full p-3 rounded-xl border text-left flex items-center justify-between transition ${
+                        isMe
+                            ? 'bg-cyan-500/20 border-cyan-400 text-white'
+                            : 'bg-slate-900/90 border-slate-800 text-slate-300 hover:border-slate-700'
+                    }">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full ${isMe ? 'bg-cyan-400 text-slate-950' : 'bg-slate-800 text-slate-400'} text-xs font-extrabold flex items-center justify-center">
+                                ${idx + 1}
+                            </span>
+                            <div>
+                                <div class="text-xs font-bold flex items-center gap-1.5">
+                                    <span>${escapeHtml(name)}</span>
+                                    ${isAdm ? '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px]">👑 Админ</span>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                        ${isMe ? '<i class="fa-solid fa-circle-check text-cyan-400"></i>' : '<span class="text-[11px] text-slate-500">Выбрать</span>'}
+                    </button>
+                `;
+            }).join("");
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        window.closeProfileModal = function() {
+            const modal = document.getElementById("profile-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+
+        window.selectMyProfile = function(idx) {
+            myProfileIndex = idx;
+            localStorage.setItem("phuket2026_my_profile_idx", String(idx));
+            // Автоматически подставляем выбранного человека в поле "Кто оплатил чек"
+            const payerSelect = document.getElementById("exp-payer");
+            if (payerSelect) payerSelect.value = String(idx);
+            closeProfileModal();
+            refreshAllUI();
+            showToast(`Вы вошли как: ${participants[idx]}`);
+        };
+
+        // МОДАЛЬНОЕ ОКНО ПРАВ ДОСТУПА (АДМИН-ПАНЕЛЬ)
+        window.openPermissionsModal = function() {
+            renderPermissionsModalContent();
+            const modal = document.getElementById("permissions-modal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        window.closePermissionsModal = function() {
+            const modal = document.getElementById("permissions-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+
+        window.openTgGuideModal = function() {
+            const modal = document.getElementById("tg-guide-modal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        window.closeTgGuideModal = function() {
+            const modal = document.getElementById("tg-guide-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+
+        function renderPermissionsModalContent() {
+            const isAdmin = isCurrentUserAdmin();
+            const lockBanner = document.getElementById("admin-lock-banner");
+            const controlsBody = document.getElementById("admin-controls-body");
+
+            if (!lockBanner || !controlsBody) return;
+
+            if (isAdmin) {
+                lockBanner.classList.add("hidden");
+                controlsBody.classList.remove("opacity-50", "pointer-events-none");
+            } else {
+                lockBanner.classList.remove("hidden");
+                controlsBody.classList.add("opacity-50", "pointer-events-none");
+            }
+
+            // Значения селектов
+            document.getElementById("rule-settle-mode").value = permissions.settleMode || "admins_only";
+            document.getElementById("rule-add-mode").value = permissions.addExpenseMode || "everyone";
+            document.getElementById("rule-delete-mode").value = permissions.deleteExpenseMode || "admins_only";
+            document.getElementById("admin-new-pin").value = permissions.adminPin || "2026";
+
+            // Список 7 участников для выдачи прав со-админа
+            const rolesList = document.getElementById("admin-roles-list");
+            const adminList = permissions.adminIndices || [0];
+
+            rolesList.innerHTML = participants.map((name, idx) => {
+                const isPersonAdmin = adminList.includes(idx);
+                const isMainCreator = idx === 0; // Виктор всегда главный организатор
+
+                return `
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border ${isPersonAdmin ? 'border-amber-500/40' : 'border-slate-800'} flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <span class="w-5 h-5 rounded-full bg-slate-800 text-[10px] font-bold text-slate-300 flex items-center justify-center shrink-0">${idx + 1}</span>
+                            <span class="text-xs font-bold text-white truncate">${escapeHtml(name)}</span>
+                        </div>
+                        ${
+                            isMainCreator
+                                ? `<span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 text-[11px] font-extrabold shrink-0">👑 Главный админ</span>`
+                                : `<button onclick="toggleParticipantAdminRole(${idx})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition shrink-0 ${
+                                      isPersonAdmin
+                                          ? 'bg-amber-500 text-slate-950'
+                                          : 'bg-slate-800 text-slate-400 hover:text-white'
+                                  }">
+                                      ${isPersonAdmin ? '👑 Со-админ (Вкл)' : '👤 Сделать админом'}
+                                  </button>`
+                        }
+                    </div>
+                `;
+            }).join("");
+        }
+
+        window.unlockAdminWithPin = function() {
+            const input = document.getElementById("admin-pin-input");
+            const entered = (input.value || "").trim();
+            const actualPin = permissions.adminPin || "2026";
+
+            if (entered === actualPin) {
+                isPinUnlockedOnDevice = true;
+                localStorage.setItem("phuket2026_pin_unlocked", "true");
+                input.value = "";
+                refreshAllUI();
+                showToast("👑 Права организатора разблокированы!");
+            } else {
+                showToast("❌ Неверный PIN-код! По умолчанию: 2026");
+            }
+        };
+
+        window.toggleParticipantAdminRole = function(idx) {
+            if (!isCurrentUserAdmin()) {
+                showToast("Только организатор (Виктор) может назначать админов");
+                return;
+            }
+            if (idx === 0) return; // Виктор всегда админ
+            const set = new Set(permissions.adminIndices || [0]);
+            if (set.has(idx)) {
+                set.delete(idx);
+                showToast(`У участника ${participants[idx]} теперь роль обычного участника`);
+            } else {
+                set.add(idx);
+                showToast(`${participants[idx]} назначен 👑 Со-админом!`);
+            }
+            permissions.adminIndices = Array.from(set);
+            pushStateToCloud();
+        };
+
+        window.updateAccessRule = function(ruleKey, value) {
+            if (!isCurrentUserAdmin()) {
+                showToast("Разблокируйте панель организатора (PIN)");
+                return;
+            }
+            permissions[ruleKey] = value;
+            pushStateToCloud();
+            showToast("Правило доступа обновлено для всей группы!");
+        };
+
+        window.saveNewAdminPin = function() {
+            if (!isCurrentUserAdmin()) return;
+            const newPin = document.getElementById("admin-new-pin").value.trim();
+            if (!newPin || newPin.length < 3) {
+                showToast("PIN должен быть не короче 3 символов");
+                return;
+            }
+            permissions.adminPin = newPin;
+            pushStateToCloud();
+            showToast(`Новый PIN организатора сохранен: ${newPin}`);
+        };
+
+        // 1. ТАЙМЕР ДО ПРИЛЕТА (13 НОЯБРЯ 2026 В 07:20 ПО ПХУКЕТУ UTC+7)
+        function updateCountdown() {
+            const tripStart = new Date("2026-11-13T07:20:00+07:00").getTime();
+            const tripEnd = new Date("2026-11-20T08:15:00+07:00").getTime();
+            const now = new Date().getTime();
+            const el = document.getElementById("countdown-text");
+            if (!el) return;
+
+            if (now < tripStart) {
+                const diff = tripStart - now;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                el.innerHTML = `До прилета: ${days} дн. ${hours} ч. ${mins} м. 🔥`;
+            } else if (now >= tripStart && now <= tripEnd) {
+                el.innerHTML = `🌴 Мы на Пхукете! 7 дней отдыха (вылет 20 ноя)`;
+            } else {
+                el.innerHTML = `✈️ Поездка: 13–20 ноя (7 дней отдыха + вылет)`;
+            }
+        }
+
+        // 2. РЕНДЕР ВКЛАДКИ МАРШРУТ
+        function renderDaySelector() {
+            const container = document.getElementById("day-selector");
+            if (!container) return;
+            container.innerHTML = itineraryData.map((d, idx) => {
+                const isActive = idx === currentDayIndex;
+                const tabTitle = d.shortTab;
+                const dateSub = d.shortDate;
+                const isFlightTab = idx === 7;
+                return `
+                    <button onclick="selectDay(${idx})" class="shrink-0 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition flex flex-col items-center min-w-[74px] ${
+                        isActive 
+                            ? (isFlightTab ? 'bg-gradient-to-br from-amber-500 to-rose-500 text-slate-950 shadow-lg shadow-amber-500/25' : 'bg-gradient-to-br from-cyan-500 to-emerald-500 text-slate-950 shadow-lg shadow-cyan-500/25')
+                            : (isFlightTab ? 'glass-card text-amber-300 border-amber-500/30 hover:border-amber-500/50' : 'glass-card text-slate-300 hover:text-white')
+                    }">
+                        <span class="text-[10px] uppercase opacity-80">${tabTitle}</span>
+                        <span class="text-sm font-extrabold mt-0.5">${dateSub}</span>
+                    </button>
+                `;
+            }).join("");
+        }
+
+        window.selectDay = function(index) {
+            currentDayIndex = index;
+            renderDaySelector();
+            const dayObj = itineraryData[index];
+
+            document.getElementById("current-day-date").textContent = dayObj.date;
+
+            const badgeLabel = index === 7 
+                ? `Логистика вылета • 20 ноя (08:15)` 
+                : `День ${dayObj.day} из 7 дней отдыха • ${dayObj.date}`;
+
+            document.getElementById("day-hero-card").innerHTML = `
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">${badgeLabel}</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-white/10 text-[11px] font-semibold text-emerald-300">${dayObj.vibe}</span>
+                </div>
+                <h3 class="text-lg font-extrabold text-white leading-snug">${dayObj.title}</h3>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${dayObj.summary}</p>
+            `;
+
+            document.getElementById("day-timeline").innerHTML = dayObj.items.map(item => {
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.placeQuery)}`;
+                const voters = itineraryVotes[item.id] || [];
+                const iVoted = voters.includes(myProfileIndex);
+                const voterNames = voters.map(idx => participants[idx] || `Друг ${idx + 1}`).join(", ");
+
+                return `
+                    <div class="glass-card rounded-2xl p-4 transition hover:border-white/20">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded-lg border border-slate-700/70">
+                                <i class="fa-solid ${item.icon} ${item.color}"></i>
+                                ${item.time}
+                            </span>
+                            <a href="${mapsUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 text-xs font-bold active:scale-95 transition">
+                                <i class="fa-solid fa-location-arrow"></i> ${item.placeLabel}
+                            </a>
+                        </div>
+                        <h4 class="text-base font-bold text-white">${item.title}</h4>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">${item.desc}</p>
+
+                        <!-- Интерактивное голосование участников за локацию -->
+                        <div class="mt-3 pt-2.5 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <div class="text-[11px] text-slate-400 truncate">
+                                ${voters.length > 0 ? `🔥 Идут (${voters.length}/7): <span class="text-slate-200 font-medium">${escapeHtml(voterNames)}</span>` : 'Нажми «Я в деле!», чтобы отметиться'}
+                            </div>
+                            <button onclick="toggleVoteItineraryItem('${item.id}')" class="px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition active:scale-95 ${
+                                iVoted
+                                    ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/40'
+                                    : 'bg-slate-800 text-slate-300 hover:text-white'
+                            }">
+                                ${iVoted ? '✅ Я в деле' : '🙋‍♂️ Я в деле!'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        };
+
+        window.toggleVoteItineraryItem = function(itemId) {
+            const currentList = itineraryVotes[itemId] || [];
+            const exists = currentList.includes(myProfileIndex);
+            if (exists) {
+                itineraryVotes[itemId] = currentList.filter(i => i !== myProfileIndex);
+            } else {
+                itineraryVotes[itemId] = [...currentList, myProfileIndex];
+            }
+            pushStateToCloud();
+        };
+
+        // 3. ЧЕК-ЛИСТ
+        function renderChecklist() {
+            const savedState = JSON.parse(localStorage.getItem("phuket_checklist_2026") || "{}");
+            const container = document.getElementById("checklist-container");
+            if (!container) return;
+            let doneCount = 0;
+
+            container.innerHTML = defaultChecklist.map(item => {
+                const checked = !!savedState[item.id];
+                if (checked) doneCount++;
+                return `
+                    <div onclick="toggleCheckItem('${item.id}')" class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800 cursor-pointer transition hover:border-slate-700">
+                        <div class="w-5 h-5 rounded-md flex items-center justify-center border shrink-0 ${checked ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600'}">
+                            ${checked ? '<i class="fa-solid fa-check text-xs"></i>' : ''}
+                        </div>
+                        <span class="text-xs font-medium ${checked ? 'line-through text-slate-500' : 'text-slate-200'}">${item.text}</span>
+                    </div>
+                `;
+            }).join("");
+
+            document.getElementById("checklist-progress").textContent = `${doneCount}/${defaultChecklist.length}`;
+        }
+
+        window.toggleCheckItem = function(id) {
+            const savedState = JSON.parse(localStorage.getItem("phuket_checklist_2026") || "{}");
+            savedState[id] = !savedState[id];
+            localStorage.setItem("phuket_checklist_2026", JSON.stringify(savedState));
+            renderChecklist();
+        };
+
+        // 4. ВКЛАДКА "ОБЩАК / СЧЕТ" (7 УЧАСТНИКОВ, БАЛАНСЫ, ОБНУЛЕНИЕ С ПРАВАМИ ДОСТУПА)
+        function renderParticipantsUI() {
+            const adminList = permissions.adminIndices || [0];
+
+            // 1. Бейджи сверху
+            const badgesContainer = document.getElementById("participants-badges");
+            if (badgesContainer) {
+                badgesContainer.innerHTML = participants.map((name, idx) => {
+                    const isAdm = adminList.includes(idx);
+                    const isMe = idx === myProfileIndex;
+                    return `
+                        <button onclick="selectMyProfile(${idx})" class="px-2.5 py-1 rounded-xl ${isMe ? 'bg-cyan-500/20 border-cyan-400 text-white' : 'bg-slate-900/90 border-slate-700 text-slate-200'} border text-xs font-semibold flex items-center gap-1.5 hover:border-cyan-400 transition">
+                            <span class="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center">${idx + 1}</span>
+                            <span>${escapeHtml(name)}</span>
+                            ${isAdm ? '<span title="Админ общака">👑</span>' : ''}
+                        </button>
+                    `;
+                }).join("");
+            }
+
+            // 2. Выпадающий список "Кто платил"
+            const payerSelect = document.getElementById("exp-payer");
+            if (payerSelect) {
+                const currentPayer = payerSelect.value !== "" ? payerSelect.value : String(myProfileIndex);
+                payerSelect.innerHTML = participants.map((name, idx) => `
+                    <option value="${idx}">${escapeHtml(name)}${adminList.includes(idx) ? ' 👑' : ''}</option>
+                `).join("");
+                payerSelect.value = currentPayer;
+            }
+
+            // 3. Чекбоксы "На кого делим"
+            const involvedContainer = document.getElementById("exp-involved-list");
+            if (involvedContainer) {
+                const existingChecks = Array.from(document.querySelectorAll(".exp-involved-checkbox")).map(cb => cb.checked);
+                involvedContainer.innerHTML = participants.map((name, idx) => {
+                    const isChecked = existingChecks.length === 7 ? existingChecks[idx] : true;
+                    return `
+                        <label class="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800 cursor-pointer text-xs text-slate-200">
+                            <input type="checkbox" value="${idx}" ${isChecked ? 'checked' : ''} class="exp-involved-checkbox accent-cyan-400 w-4 h-4 rounded">
+                            <span class="truncate font-medium">${escapeHtml(name)}</span>
+                        </label>
+                    `;
+                }).join("");
+            }
+        }
+
+        window.handleToggleEditParticipants = function() {
+            if (!canUserDeleteOrRename()) {
+                showToast("🔒 Менять имена может только Виктор (Админ). Нажмите «Права доступа»");
+                return;
+            }
+            const editor = document.getElementById("participants-editor");
+            const isHidden = editor.classList.contains("hidden");
+            if (isHidden) {
+                const inputsList = document.getElementById("participants-inputs-list");
+                inputsList.innerHTML = participants.map((name, idx) => `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-400 w-6">#${idx + 1}</span>
+                        <input type="text" id="edit-p-name-${idx}" value="${escapeHtml(name)}" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400" placeholder="Имя участника ${idx + 1}">
+                    </div>
+                `).join("");
+                editor.classList.remove("hidden");
+            } else {
+                editor.classList.add("hidden");
+            }
+        };
+
+        window.saveEditedParticipantNames = function() {
+            if (!canUserDeleteOrRename()) return;
+            for (let i = 0; i < 7; i++) {
+                const inp = document.getElementById(`edit-p-name-${i}`);
+                if (inp) {
+                    participants[i] = inp.value.trim() || DEFAULT_PARTICIPANTS[i];
+                }
+            }
+            document.getElementById("participants-editor").classList.add("hidden");
+            pushStateToCloud();
+            showToast("Имена всех 7 участников обновлены!");
+        };
+
+        window.resetDefaultParticipantNames = function() {
+            if (!canUserDeleteOrRename()) return;
+            participants = [...DEFAULT_PARTICIPANTS];
+            document.getElementById("participants-editor").classList.add("hidden");
+            pushStateToCloud();
+            showToast("Установлены имена: Виктор, Юля, Даша, Саша, Наташа, Арина, Феруза!");
+        };
+
+        window.selectAllInvolved = function(state) {
+            document.querySelectorAll(".exp-involved-checkbox").forEach(cb => cb.checked = state);
+        };
+
+        window.fillPresetExpense = function(title, amount, currency) {
+            document.getElementById("exp-title").value = title;
+            document.getElementById("exp-amount").value = amount;
+            document.getElementById("exp-currency").value = currency;
+            selectAllInvolved(true);
+        };
+
+        window.addExpense = function() {
+            if (!canUserAddExpense()) {
+                showToast("🔒 Добавление чеков ограничено Админом. Откройте «Права доступа»");
+                return;
+            }
+
+            const titleInput = document.getElementById("exp-title");
+            const amountInput = document.getElementById("exp-amount");
+            const currency = document.getElementById("exp-currency").value;
+            const payerIndex = parseInt(document.getElementById("exp-payer").value, 10);
+
+            const title = titleInput.value.trim() || "Общий расход";
+            const rawAmount = parseFloat(amountInput.value);
+
+            if (!rawAmount || rawAmount <= 0) {
+                showToast("Укажите сумму чека больше 0");
+                return;
+            }
+
+            const involvedIndices = Array.from(document.querySelectorAll(".exp-involved-checkbox"))
+                .filter(cb => cb.checked)
+                .map(cb => parseInt(cb.value, 10));
+
+            if (involvedIndices.length === 0) {
+                showToast("Выберите хотя бы 1 участника");
+                return;
+            }
+
+            const amountThb = currency === "USD" ? Math.round(rawAmount * USD_TO_THB_RATE) : Math.round(rawAmount);
+
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
+            expenses.unshift({
+                id: "exp-" + Date.now(),
+                title,
+                amountThb,
+                originalAmount: rawAmount,
+                currency,
+                payerIndex,
+                involvedIndices,
+                isSettlement: false,
+                createdBy: participants[myProfileIndex] || "Участник",
+                createdAt: timeStr
+            });
+
+            titleInput.value = "";
+            amountInput.value = "";
+            selectAllInvolved(true);
+            pushStateToCloud();
+            showToast("Расход записан и синхронизирован!");
+        };
+
+        // РАСЧЕТ БАЛАНСОВ ДЛЯ КАЖДОГО ИЗ 7 УЧАСТНИКОВ
+        function calculateBalancesData() {
+            const paid = new Array(7).fill(0);
+            const share = new Array(7).fill(0);
+            const net = new Array(7).fill(0);
+            let totalSpentGroup = 0;
+
+            expenses.forEach(exp => {
+                const count = (exp.involvedIndices || []).length;
+                if (count === 0) return;
+                const splitPart = exp.amountThb / count;
+
+                if (!exp.isSettlement) {
+                    totalSpentGroup += exp.amountThb;
+                    paid[exp.payerIndex] += exp.amountThb;
+                    exp.involvedIndices.forEach(idx => {
+                        share[idx] += splitPart;
+                    });
+                }
+
+                net[exp.payerIndex] += exp.amountThb;
+                exp.involvedIndices.forEach(idx => {
+                    net[idx] -= splitPart;
+                });
+            });
+
+            const debtors = [];
+            const creditors = [];
+
+            net.forEach((val, idx) => {
+                const rounded = Math.round(val);
+                if (rounded < -1) debtors.push({ index: idx, amount: -rounded });
+                if (rounded > 1) creditors.push({ index: idx, amount: rounded });
+            });
+
+            debtors.sort((a, b) => b.amount - a.amount);
+            creditors.sort((a, b) => b.amount - a.amount);
+
+            const transfers = [];
+            let i = 0, j = 0;
+            while (i < debtors.length && j < creditors.length) {
+                const sendAmount = Math.min(debtors[i].amount, creditors[j].amount);
+                if (sendAmount > 0) {
+                    transfers.push({
+                        fromIndex: debtors[i].index,
+                        toIndex: creditors[j].index,
+                        amountThb: Math.round(sendAmount)
+                    });
+                }
+                debtors[i].amount -= sendAmount;
+                creditors[j].amount -= sendAmount;
+                if (debtors[i].amount <= 1) i++;
+                if (creditors[j].amount <= 1) j++;
+            }
+
+            return { paid, share, net, totalSpentGroup, transfers };
+        }
+
+        // ИНДИВИДУАЛЬНАЯ КНОПКА "ОБНУЛИТЬ" С ПРОВЕРКОЙ ПРАВ ДОСТУПА
+        window.settleParticipantBalance = function(personIndex) {
+            const { net } = calculateBalancesData();
+            const currentNet = Math.round(net[personIndex]);
+
+            if (!canUserSettleParticipant(personIndex, currentNet)) {
+                showToast("🔒 Обнулять баланс может только Виктор (👑 Админ). Нажмите «Права доступа»");
+                return;
+            }
+
+            if (Math.abs(currentNet) <= 1) {
+                showToast(`${participants[personIndex]} уже в расчете (0 ฿)!`);
+                return;
+            }
+
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            const actorName = participants[myProfileIndex] || "Админ";
+
+            if (currentNet < 0) {
+                const debtAmount = Math.abs(currentNet);
+                const positiveIndices = [];
+                let totalPositive = 0;
+
+                net.forEach((val, idx) => {
+                    if (val > 1 && idx !== personIndex) {
+                        positiveIndices.push(idx);
+                        totalPositive += val;
+                    }
+                });
+
+                if (positiveIndices.length === 0) return;
+
+                positiveIndices.forEach(credIdx => {
+                    const portion = Math.round(debtAmount * (net[credIdx] / totalPositive));
+                    if (portion > 0) {
+                        expenses.unshift({
+                            id: "settle-" + Date.now() + "-" + credIdx,
+                            title: `✅ Обнуление долга: ${participants[personIndex]} → ${participants[credIdx]}`,
+                            amountThb: portion,
+                            originalAmount: portion,
+                            currency: "THB",
+                            payerIndex: personIndex,
+                            involvedIndices: [credIdx],
+                            isSettlement: true,
+                            createdBy: actorName,
+                            createdAt: timeStr
+                        });
+                    }
+                });
+
+                pushStateToCloud();
+                showToast(`Долг участника ${participants[personIndex]} обнулен!`);
+            } else {
+                const creditAmount = currentNet;
+                const negativeIndices = [];
+                let totalNegative = 0;
+
+                net.forEach((val, idx) => {
+                    if (val < -1 && idx !== personIndex) {
+                        negativeIndices.push(idx);
+                        totalNegative += Math.abs(val);
+                    }
+                });
+
+                if (negativeIndices.length === 0) return;
+
+                negativeIndices.forEach(debtIdx => {
+                    const portion = Math.round(creditAmount * (Math.abs(net[debtIdx]) / totalNegative));
+                    if (portion > 0) {
+                        expenses.unshift({
+                            id: "settle-" + Date.now() + "-" + debtIdx,
+                            title: `✅ Выплата баланса: ${participants[debtIdx]} → ${participants[personIndex]}`,
+                            amountThb: portion,
+                            originalAmount: portion,
+                            currency: "THB",
+                            payerIndex: debtIdx,
+                            involvedIndices: [personIndex],
+                            isSettlement: true,
+                            createdBy: actorName,
+                            createdAt: timeStr
+                        });
+                    }
+                });
+
+                pushStateToCloud();
+                showToast(`Баланс участника ${participants[personIndex]} закрыт в 0 ฿!`);
+            }
+        };
+
+        // ОТРИСОВКА ИТОГОВ, КНОПОК "ОБНУЛИТЬ" И ИСТОРИИ
+        function renderSplitBalancesAndHistory() {
+            const { paid, share, net, totalSpentGroup, transfers } = calculateBalancesData();
+            const adminList = permissions.adminIndices || [0];
+
+            const totalUsd = (totalSpentGroup / USD_TO_THB_RATE).toFixed(0);
+            const spentEl = document.getElementById("total-trip-spent");
+            if (spentEl) {
+                spentEl.textContent = `Всего потрачено группой: ${totalSpentGroup.toLocaleString('ru-RU')} ฿ (≈ $${totalUsd})`;
+            }
+
+            // 1. Список всех 7 участников с их балансом и кнопкой "Обнулить"
+            const balancesContainer = document.getElementById("balances-list");
+            if (balancesContainer) {
+                balancesContainer.innerHTML = participants.map((name, idx) => {
+                    const personPaid = Math.round(paid[idx]);
+                    const personShare = Math.round(share[idx]);
+                    const personNet = Math.round(net[idx]);
+                    const isAdm = adminList.includes(idx);
+
+                    let statusBadge = "";
+                    let rowBorder = "border-slate-800";
+
+                    if (personNet < -1) {
+                        statusBadge = `<span class="text-xs font-extrabold text-rose-400">Должен: ${Math.abs(personNet).toLocaleString('ru-RU')} ฿</span>`;
+                        rowBorder = "border-rose-500/30";
+                    } else if (personNet > 1) {
+                        statusBadge = `<span class="text-xs font-extrabold text-emerald-400">Ему должны: +${personNet.toLocaleString('ru-RU')} ฿</span>`;
+                        rowBorder = "border-emerald-500/30";
+                    } else {
+                        statusBadge = `<span class="text-xs font-bold text-slate-400">В расчете (0 ฿)</span>`;
+                    }
+
+                    const isSettled = Math.abs(personNet) <= 1;
+                    const hasPermissionToSettle = canUserSettleParticipant(idx, personNet);
+
+                    return `
+                        <div class="p-3 rounded-xl bg-slate-900/80 border ${rowBorder} flex items-center justify-between gap-2">
+                            <div class="min-w-0">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="text-xs font-bold text-white truncate">${escapeHtml(name)}</span>
+                                    ${isAdm ? '<span class="text-[10px] text-amber-300">👑</span>' : ''}
+                                </div>
+                                <div class="text-[11px] text-slate-400 mt-0.5">
+                                    Внес: <b class="text-slate-200">${personPaid.toLocaleString('ru-RU')}฿</b> • Доля: <b class="text-slate-200">${personShare.toLocaleString('ru-RU')}฿</b>
+                                </div>
+                                <div class="mt-0.5">${statusBadge}</div>
+                            </div>
+
+                            <div class="shrink-0">
+                                ${
+                                    isSettled
+                                        ? `<span class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 text-slate-500 text-[11px] font-bold inline-flex items-center gap-1">
+                                               <i class="fa-solid fa-check"></i> 0 ฿
+                                           </span>`
+                                        : `<button onclick="settleParticipantBalance(${idx})" class="px-3 py-1.5 rounded-xl ${
+                                              hasPermissionToSettle
+                                                  ? 'bg-amber-500/20 hover:bg-amber-500/30 border-amber-500/40 text-amber-300'
+                                                  : 'bg-slate-800/90 border-slate-700 text-slate-400'
+                                          } border text-xs font-bold active:scale-95 transition flex items-center gap-1">
+                                               <i class="fa-solid ${hasPermissionToSettle ? 'fa-rotate-left' : 'fa-lock'} text-[10px]"></i> Обнулить
+                                           </button>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+            }
+
+            // 2. Список конкретных переводов "Кто -> Кому"
+            const transfersContainer = document.getElementById("transfers-list");
+            if (transfersContainer) {
+                if (transfers.length === 0) {
+                    transfersContainer.innerHTML = `
+                        <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-xs text-emerald-300 font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> Все участники полностью рассчитались! Долгов нет.
+                        </div>
+                    `;
+                } else {
+                    transfersContainer.innerHTML = transfers.map(t => {
+                        const usdEq = (t.amountThb / USD_TO_THB_RATE).toFixed(1);
+                        return `
+                            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs">
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    <span class="font-bold text-rose-300">${escapeHtml(participants[t.fromIndex])}</span>
+                                    <i class="fa-solid fa-arrow-right text-slate-500 text-[10px]"></i>
+                                    <span class="font-bold text-emerald-300">${escapeHtml(participants[t.toIndex])}</span>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <span class="font-extrabold text-white">${t.amountThb.toLocaleString('ru-RU')} ฿</span>
+                                    <span class="text-[10px] text-slate-400 block">≈ $${usdEq}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+                }
+            }
+
+            // 3. История расходов
+            const historyContainer = document.getElementById("expenses-history-list");
+            if (historyContainer) {
+                if (expenses.length === 0) {
+                    historyContainer.innerHTML = `
+                        <p class="text-xs text-slate-500 text-center py-4">Пока нет записанных расходов. Добавьте первый чек выше!</p>
+                    `;
+                } else {
+                    const canDelete = canUserDeleteOrRename();
+                    historyContainer.innerHTML = expenses.map(exp => {
+                        const payerName = participants[exp.payerIndex] || "Участник";
+                        const involvedNames = (exp.involvedIndices || []).length === 7
+                            ? "Все 7 чел."
+                            : (exp.involvedIndices || []).map(i => participants[i]).join(", ");
+
+                        return `
+                            <div class="p-3 rounded-xl bg-slate-900/70 border ${exp.isSettlement ? 'border-emerald-500/30' : 'border-slate-800'} flex items-center justify-between gap-2">
+                                <div class="min-w-0">
+                                    <div class="text-xs font-bold text-white truncate">${escapeHtml(exp.title)}</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">
+                                        Оплатил: <b class="text-cyan-300">${escapeHtml(payerName)}</b> • На: ${escapeHtml(involvedNames)}
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 shrink-0">
+                                    <div class="text-right">
+                                        <div class="text-xs font-extrabold ${exp.isSettlement ? 'text-emerald-400' : 'text-white'}">${exp.amountThb.toLocaleString('ru-RU')} ฿</div>
+                                        <div class="text-[10px] text-slate-500">${exp.createdAt || ''}</div>
+                                    </div>
+                                    <button onclick="deleteExpense('${exp.id}')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 flex items-center justify-center text-xs transition" title="Удалить запись">
+                                        <i class="fa-solid ${canDelete ? 'fa-xmark' : 'fa-lock text-[10px]'}"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+                }
+            }
+        }
+
+        window.deleteExpense = function(id) {
+            if (!canUserDeleteOrRename()) {
+                showToast("🔒 Удалять записи может только Виктор (👑 Админ)");
+                return;
+            }
+            expenses = expenses.filter(e => e.id !== id);
+            pushStateToCloud();
+            showToast("Запись удалена");
+        };
+
+        window.requestResetAllExpenses = function() {
+            if (!isCurrentUserAdmin()) {
+                showToast("🔒 Полный сброс всех счетов доступен только Виктору (👑 Админу)");
+                return;
+            }
+            const modal = document.getElementById("confirm-modal");
+            document.getElementById("modal-title").textContent = "Сбросить все счета общака?";
+            document.getElementById("modal-desc").textContent = "Все записанные чеки и балансы будут обнулены на телефонах всех 7 участников. Имена и настройки прав сохранятся.";
+            const btn = document.getElementById("modal-confirm-btn");
+            btn.onclick = function() {
+                expenses = [];
+                pushStateToCloud();
+                closeConfirmModal();
+                showToast("Все счета группы полностью обнулены!");
+            };
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        window.closeConfirmModal = function() {
+            const modal = document.getElementById("confirm-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+
+        // КОПИРОВАНИЕ ОТЧЕТА ПО ДОЛГАМ В TELEGRAM ЧАТ
+        window.copySummaryReport = function() {
+            const { net, totalSpentGroup, transfers } = calculateBalancesData();
+            let lines = [
+                `🌴 ОБЩАК ПХУКЕТ 2026 (7 друзей)`,
+                `💰 Всего потрачено: ${totalSpentGroup.toLocaleString('ru-RU')} ฿\n`,
+                `📊 Баланс участников:`
+            ];
+
+            participants.forEach((name, idx) => {
+                const val = Math.round(net[idx]);
+                if (val < -1) lines.push(`• ${name}: должен ${Math.abs(val)} ฿`);
+                else if (val > 1) lines.push(`• ${name}: ему должны +${val} ฿`);
+                else lines.push(`• ${name}: 0 ฿ (в расчете)`);
+            });
+
+            if (transfers.length > 0) {
+                lines.push(`\n💸 Кому сколько перевести:`);
+                transfers.forEach(t => {
+                    lines.push(`👉 ${participants[t.fromIndex]} → ${participants[t.toIndex]}: ${t.amountThb} ฿`);
+                });
+            } else {
+                lines.push(`\n✅ Все полностью рассчитались!`);
+            }
+
+            copyToClipboard(lines.join("\n"), "Отчет по общаку скопирован для отправки в Telegram!");
+        };
+
+        // 5. РУЛЕТКА НА 7 ДРУЗЕЙ
+        const dinnerOptions = [
+            "🍤 Свежие морепродукты на рынке Раваи",
+            "🍜 Том Ям и Пад Тай на ночном рынке Ката",
+            "🥩 Пляжный гриль-бар на закате",
+            "🍕 Взять пиццу и роллы к бассейну",
+            "🍛 Тайский ресторан в Phuket Old Town",
+            "🍔 Бургеры и коктейли у моря"
+        ];
+
+        const eveningOptions = [
+            "🌅 Встречаем закат на мысе Промтхеп",
+            "🍹 Панорамный бар на скале Karon Viewpoint",
+            "🎶 Бар с живой музыкой на Кате",
+            "💆‍♂️ Часовой тайский массаж + манго-шейки",
+            "🔥 Едем на Bangla Road в Патонг",
+            "🏊‍♂️ Вечеринка у бассейна в Blue Pearl Kata"
+        ];
+
+        window.setRouletteMode = function(mode) {
+            currentRouletteMode = mode;
+            const modes = ['person', 'dinner', 'evening'];
+            modes.forEach(m => {
+                const btn = document.getElementById(`mode-btn-${m}`);
+                if (m === mode) {
+                    btn.className = "py-2 px-2 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 transition";
+                } else {
+                    btn.className = "py-2 px-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 transition";
+                }
+            });
+
+            const qEl = document.getElementById("roulette-question");
+            const dEl = document.getElementById("roulette-display");
+            dEl.textContent = "Нажми «Крутить!»";
+
+            if (mode === 'person') qEl.textContent = "Кто из нашей семерки выбирает ресторан или вызывает минивэн?";
+            if (mode === 'dinner') qEl.textContent = "Что идем есть сегодня всей компанией?";
+            if (mode === 'evening') qEl.textContent = "Куда отправляемся сегодня вечером?";
+        };
+
+        window.spinRoulette = function() {
+            const display = document.getElementById("roulette-display");
+            let pool = [];
+            if (currentRouletteMode === 'person') pool = participants.map(n => `🎉 ${n}`);
+            if (currentRouletteMode === 'dinner') pool = dinnerOptions;
+            if (currentRouletteMode === 'evening') pool = eveningOptions;
+
+            let ticks = 0;
+            const maxTicks = 15;
+            const interval = setInterval(() => {
+                const randomItem = pool[Math.floor(Math.random() * pool.length)];
+                display.textContent = randomItem;
+                display.classList.toggle("scale-105");
+                ticks++;
+                if (ticks >= maxTicks) {
+                    clearInterval(interval);
+                    display.classList.remove("scale-105");
+                }
+            }, 70);
+        };
+
+        // 6. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        window.switchTab = function(tabName) {
+            const tabs = ['itinerary', 'split', 'wheel'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`tab-${t}`);
+                const nav = document.getElementById(`nav-${t}`);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    nav.className = "flex flex-col items-center justify-center py-2 rounded-xl text-cyan-400 bg-cyan-500/15 font-bold transition";
+                } else {
+                    sec.classList.add('hidden');
+                    nav.className = "flex flex-col items-center justify-center py-2 rounded-xl text-slate-400 hover:text-slate-200 font-medium transition";
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // 7. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+        window.copyShareText = function() {
+            const dayObj = itineraryData[currentDayIndex];
+            const summaryText = `🌴 ПХУКЕТ 2026 • 7 дней отдыха (13–20 ноября, 7 друзей)\n📍 Отель: The Blue Pearl Kata Hotel\n\n📅 ${dayObj.day === 8 ? 'Вылет домой (20 ноя)' : 'План на День ' + dayObj.day} (${dayObj.date}): ${dayObj.title}\n` +
+                dayObj.items.map(i => `• ${i.time}: ${i.title}`).join("\n");
+            copyToClipboard(summaryText, "План скопирован для отправки в чат!");
+        };
+
+        function copyToClipboard(text, message) {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            showToast(message);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            document.getElementById("toast-message").textContent = msg;
+            toast.classList.remove("hidden");
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 2800);
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        // СТАРТ ПРИЛОЖЕНИЯ
+        window.addEventListener("DOMContentLoaded", () => {
+            initTelegramWebApp();
+            loadLocalFallback();
+            updateCountdown();
+            setInterval(updateCountdown, 30000);
+            renderChecklist();
+            refreshAllUI();
+            initFirebaseSync();
+        });
+    </script>
+</body>
+</html>
